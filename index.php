@@ -9,6 +9,38 @@
 </head>
 <body>
     <?php require_once 'process.php' ; ?>
+    <div class="container">
+    <?php
+    // Database Connection
+        $mysqli = new mysqli('localhost','root','','crud') or die(mysqli_error($mysqli));
+    // Query
+        $result = $mysqli->query("SELECT * FROM data") or die($mysqli->error);
+
+    ?>
+
+    <!-- HTML Table to Display-->
+    <div class ="row justify-content-center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <?php
+                while ($row = $result->fetch_assoc()):?>
+            <tr>
+                <td><?php echo $row['name']; ?> </td>
+                <td><?php echo $row['location']; ?></td>
+                <td>TODO</td>
+            </tr>
+<?php endwhile; ?>
+            
+        </table>
+
+    </div>
+
     <div class="row justify-content-center">
     <form action="process.php" method="POST">
         <div class="form-group">
@@ -23,6 +55,6 @@
         </div>
     </form>
     </div>
-    
+    </div>
 </body>
 </html>
